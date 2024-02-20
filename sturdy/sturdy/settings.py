@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'goddles.apps.GoddlesConfig',
+    'user.apps.UserConfig',
 ]
 
 REST_FRAMEWORK = {
@@ -60,9 +61,9 @@ REST_FRAMEWORK = {
 }
 SIMPLE_JWT = {
     # token有效时长(返回的 access 有效时长)
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(seconds=30),
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=15),
     # token刷新的有效时间(返回的 refresh 有效时长)
-    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(seconds=20),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
 }
 
 MIDDLEWARE = [
@@ -149,9 +150,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = '/var/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # 添加此项
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),  # 添加此项
+# ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
