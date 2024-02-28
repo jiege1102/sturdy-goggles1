@@ -1,10 +1,8 @@
-# user/urls.py
 from django.urls import path
-from .views import CreateStudentView, CreateTeacherView, MyTokenObtainPairView, MyTokenRefreshView
+from .views import CreateUserView, MyTokenObtainPairView, MyTokenRefreshView
 
 urlpatterns = [
-    path('register/student/', CreateStudentView.as_view(), name='register_student'),
-    path('register/teacher/', CreateTeacherView.as_view(), name='register_teacher'),
-    path('login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('register/', CreateUserView.as_view(), name='register'),
+    path('login/', MyTokenObtainPairView.as_view(), name='login'),
     path('token/refresh/', MyTokenRefreshView.as_view(), name='token_refresh'),
 ]

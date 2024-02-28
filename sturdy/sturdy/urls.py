@@ -19,6 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('user.urls')),  # 包含'user'应用程序的URL
+    path('api/', include('user.urls')),
+    path('goddles/', include('goddles.url')),
 ]
 
