@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态多系列柱状图</title>
+    <!-- 引入 ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 800px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 准备请求参数
+        var requestData = JSON.stringify({
+            "name": "谭泽坤",
+            "school": "树德实验中学"
+        });
+
+        // 发起 AJAX POST 请求获取数据
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://127.0.0.1:8000/goddles/students_details/', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    // 根据接口返回的数据动态更新图表
+                    updateChart(data);
+                } else {
+                    console.error('Failed to fetch data.');
+                }
+            }
+        };
+        xhr.send(requestData);
+
+        // 更新图表函数
+        function updateChart(data) {
+            var option = {
+                title: {
+                    text: '成绩分析'
+                },
+                tooltip: {},
+                legend: {
+                    data: ['个人成绩', '班级平均成绩', '学校平均成绩', '区域平均成绩']
+                },
+                xAxis: {
+                    data: ['语文', '数学', '英语', '物理']
+                },
+                yAxis: {},
+                series: [{
+                    name: '个人成绩',
+                    type: 'bar',
+                    data: [parseFloat(data.chinese_score), parseFloat(data.math_score), parseFloat(data.english_score), parseFloat(data.physics_score)]
+                }, {
+                    name: '班级平均成绩',
+                    type: 'bar',
+                    data: [parseFloat(data.class_chinese_average_score), parseFloat(data.class_math_average_score), parseFloat(data.class_english_average_score), parseFloat(data.class_physics_average_score)]
+                }, {
+                    name: '学校平均成绩',
+                    type: 'bar',
+                    data: [parseFloat(data.school_chinese_average_score), parseFloat(data.school_math_average_score), parseFloat(data.school_english_average_score), parseFloat(data.school_physics_average_score)]
+                }, {
+                    name: '区域平均成绩',
+                    type: 'bar',
+                    data: [parseFloat(data.district_chinese_average_score), parseFloat(data.district_math_average_score), parseFloat(data.district_english_average_score), parseFloat(data.district_physics_average_score)]
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        }
+    </script>
+</body>
+</html>
