@@ -1,7 +1,7 @@
 # user/views.py
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
@@ -29,35 +29,28 @@ class MyTokenObtainPairView(TokenObtainPairView):
             'access': str(refresh.access_token),
             # 'school': user.school.name if user.school else '',
         })
+
+
 class MyTokenRefreshView(TokenRefreshView):
     serializer_class = MyTokenRefreshSerializer
-
-
 
 
 class CreateUserView(generics.CreateAPIView):
     serializer_class = CustomUserSerializer
     permission_classes = (permissions.AllowAny,)
 
-    def perform_create(self, serializer):
-        # 在创建用户时传递当前用户信息给序列化器
-        serializer.save(created_by=self.request.user)
-
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        # 根据角色创建用户对象
+        # 校验角色是否有效
         role = serializer.validated_data.get('role')
-        if role == 'student':
-            user = serializer.save()
-            user.set_password(request.data.get('password'))
-            user.save()
-        elif role == 'teacher':
-            user = serializer.save()
-            user.set_password(request.data.get('password'))
-            user.save()
-        else:
-            return Response({'error': 'Invalid role'}, status=400)
+        if role not in ['student', 'teacher']:
+            return Response({'error': 'Invalid role'}, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response({'message': 'User created successfully'}, status=201)
+        # 创建用户并设置密码
+        user = serializer.save()
+        user.set_password(serializer.validated_data.get('password'))
+        user.save()
+
+        return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)

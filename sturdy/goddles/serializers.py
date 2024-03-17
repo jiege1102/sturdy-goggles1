@@ -8,7 +8,7 @@ class StudentwenjuanSerializer:
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['name', 'school', 'total_score', 'chinese_score', 'math_score', 'english_score', 'physics_score',
+        fields = ['nume','name', 'school', 'total_score', 'chinese_score', 'math_score', 'english_score', 'physics_score',
                   'average_score']
 
 

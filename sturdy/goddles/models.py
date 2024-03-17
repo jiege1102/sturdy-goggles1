@@ -1,6 +1,7 @@
 from django.db import models
 
 class Student(models.Model):
+    nume = models.CharField(max_length=50,default='')
     name = models.CharField(max_length=50)
     school = models.CharField(max_length=50,default='')
     total_score = models.DecimalField(max_digits=5, decimal_places=1)

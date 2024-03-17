@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-#qm)@i%@^i$9&p$idtsz%jojjihfu$q=b*(31l1owqlm-@r-31
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost','192.168.146.1','*']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','192.168.146.1','*','192.168.0.102']
 
 
 # Application definition
@@ -163,7 +163,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',  # 允许访问的前端地址
-    'http://127.0.0.1:8080',  # 另一个示例
+    'http://127.0.0.1:8080',
+    # 'http://192.168.0.102:8080/'
 ]
 
 

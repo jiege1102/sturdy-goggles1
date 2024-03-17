@@ -20,7 +20,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'role', 'school', 'class_field', 'subject', 'password', 'groups']
+        fields = ['id', 'username', 'role', 'school', 'class_field', 'subject', 'password',]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

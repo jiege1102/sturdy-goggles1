@@ -14,12 +14,12 @@ class StudentGradeView(APIView):
     def post(self, request):
         # 获取请求数据中的姓名和学校信息
         name = request.data.get('name')
-        school = request.data.get('school')
-        print(name, school)
+        nume = request.data.get('nume')
+        print(name, nume)
 
         # 根据姓名和学校信息查询学生记录
         try:
-            student = Student.objects.get(name=name, school=school)
+            student = Student.objects.get(name=name, nume=nume)
             serializer = StudentSerializer(student)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Student.DoesNotExist:
