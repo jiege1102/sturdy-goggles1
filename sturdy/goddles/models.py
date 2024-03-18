@@ -127,8 +127,6 @@ class Chinese(models.Model):
     def __str__(self):
         return self.name
 
-from django.db import models
-
 class Math(models.Model):
     exam_number = models.CharField(max_length=15, primary_key=True)
     school = models.CharField(max_length=50)
@@ -164,8 +162,6 @@ class Math(models.Model):
     def __str__(self):
         return self.name
 
-
-from django.db import models
 
 class English(models.Model):
     exam_number = models.CharField(max_length=15, primary_key=True)
@@ -262,7 +258,6 @@ class English(models.Model):
     def __str__(self):
         return self.name
 
-from django.db import models
 
 class Physics(models.Model):
     exam_number = models.CharField(max_length=15, primary_key=True)

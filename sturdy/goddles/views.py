@@ -8,8 +8,6 @@ from .serializers import StudentSerializer, Student_detailsSerializer_bar, Stude
 from rest_framework.decorators import api_view
 
 class StudentGradeView(APIView):
-    # authentication_classes = [TokenAuthentication]  # 添加TokenAuthentication
-    # permission_classes = [IsAuthenticated]  # 添加IsAuthenticated
 
     def post(self, request):
         # 获取请求数据中的姓名和学校信息

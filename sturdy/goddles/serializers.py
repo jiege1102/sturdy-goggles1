@@ -33,6 +33,7 @@ class Student_detailsSerializer_line(serializers.ModelSerializer):
         fields = ['name', 'school', 'class_number', 'total_score','chinese_score', 'math_score', 'english_score','history_score_one', 'history_chinese_score_one', 'history_math_score_one', 'history_english_score_one',
                   'history_score_two', 'history_chinese_score_two', 'history_math_score_two', 'history_english_score_two']
 
+
 class Student_evaluateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student_evaluate
